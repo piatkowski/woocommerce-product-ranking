@@ -1,0 +1,867 @@
+$icons: 'alergicy', 'do-domu', 'do-pracy', 'filtr', 'gwiazda', 'nawilzanie', 'sortowanie-dol', 'sortowanie-gora'
+
+$fontSize: 85%
+
+$primaryColor: #009900
+$redColor: #C90000
+$blueColor: #53AAEB
+$greyColor: #CCCCCC
+$darkColor: #212121
+
+$borderRadius: 20px
+$spacing: 12px
+$iconSize: 20px
+
+$iconSizeMobile: 30px
+
+$checkboxSize: 20px
+
+$toggleButtonMargin: 4px
+$toggleButtonSize: 24px + $toggleButtonMargin
+$toggleButtonWidth: 50px
+
+body .content_wrap
+  padding: 0 !important
+
+.ip-ranking-wrapper
+  a
+    border: none
+
+  .ip-button
+    position: relative
+    background-color: $primaryColor
+    border-radius: $borderRadius
+    padding: $spacing/2 $spacing $spacing/2
+    vertical-align: middle
+    &.reset
+      background-color: $darkColor
+      display: none
+
+    &, &:hover
+      color: #FFFFFF
+      text-decoration: none
+
+    span
+      display: inline-block
+      animation: ipFadeIn ease-out 1000ms forwards
+
+  .ip-icon
+    padding-left: $iconSize + $spacing
+
+  .ip-icon:before
+    transition: transform 800ms ease-in-out 200ms
+    content: ''
+    width: 20px
+    position: absolute
+    left: $iconSize*0.5
+    height: 100%
+    top: 0
+    background-repeat: no-repeat
+    background-size: $iconSize
+    background-position: center
+
+  @each $icon in $icons
+    .ip-icon-#{$icon}:before
+      background-image: url('../icons/icona-' + $icon + '.svg')
+
+  a[data-order='DESC']:before
+    background-image: url('../icons/icona-sortowanie-dol.svg')
+    background-size: 12px
+
+  a[data-order='ASC']:before
+    background-image: url('../icons/icona-sortowanie-gora.svg')
+    background-size: 12px
+
+  .ip-icon-nawilzanie
+    width: 10px !important
+
+  #ipToggleFilter
+    &.active
+      padding-right: $spacing / 2 + 2px
+
+    &.active span
+      animation: ipFadeOut ease-out 1000ms forwards
+      opacity: 0
+      font-size: 0
+
+    &.active:before
+      transform: rotate(-180deg)
+
+  #ipFilter
+    display: none
+    font-size: $fontSize
+    margin-top: 2*$spacing
+    margin-bottom: 2*$spacing
+    pointer-events: all
+
+    form
+      transition: opacity 300ms
+      opacity: 1
+
+    &.loading
+      pointer-events: none
+      background-image: url('../icons/loading.gif')
+      background-repeat: no-repeat
+      background-position: center
+
+      form
+        opacity: 0.3
+
+    button[type=submit], button[type=reset]
+      margin-top: $spacing
+      font-size: 120%
+      padding: $spacing 2*$spacing $spacing
+
+    .heading
+      padding-bottom: $spacing
+
+      & > span
+        font-size: 22px
+        font-weight: 600
+
+    .ip-slider-container, .ip-double-slider-container
+      margin-bottom: $spacing
+
+      & > span
+      font-weight: 600
+
+    .ip-slider
+      -webkit-appearance: none
+      width: 100%
+      height: 3px
+      border-radius: 5px
+      background: $primaryColor
+      outline: none
+      -webkit-transition: .2s
+      transition: opacity .2s
+
+    .ip-slider::-webkit-slider-thumb
+      -webkit-appearance: none
+      appearance: none
+      width: 10px
+      height: 25px
+      background: $primaryColor
+      border-radius: 5px
+      cursor: pointer
+
+    .ip-slider::-moz-range-thumb
+      width: 10px
+      height: 25px
+      background: $primaryColor
+      border: none
+      cursor: pointer
+      border-radius: 5px
+
+    .ip-slider + .ip-range, .ip-double-slider + .ip-range
+      span
+        display: block
+        width: 50%
+        float: left
+
+      & > span + span
+        text-align: right
+
+      &::after
+        content: ""
+        clear: both
+        display: table
+
+    .ip-checkbox
+      display: inline-block
+      position: relative
+      padding-left: $checkboxSize*1.5
+      margin-right: $checkboxSize*1.5
+      cursor: pointer
+      -webkit-user-select: none
+      -moz-user-select: none
+      -ms-user-select: none
+      user-select: none
+      margin-bottom: $spacing
+
+      & input
+        position: absolute
+        opacity: 0
+        cursor: pointer
+        height: 0
+        width: 0
+
+        &:checked ~ .check:after
+          display: block
+
+      .check
+        position: absolute
+        top: 0
+        left: 0
+        height: $checkboxSize
+        width: $checkboxSize
+        border: 2px solid $primaryColor
+        border-radius: 3px
+
+        &:after
+          content: ""
+          position: absolute
+          display: none
+          $mark: 3px
+          $mw: $checkboxSize / 5
+          $mh: $checkboxSize / 5 * 2
+          left: ($checkboxSize - $mw * 1.41) * 0.5
+          top: ($checkboxSize - $mh) * 0.5 / 1.41
+          width: $mw
+          height: $mh
+          border: solid $primaryColor
+          border-width: 0 $mark $mark 0
+          -webkit-transform: rotate(45deg)
+          -ms-transform: rotate(45deg)
+          transform: rotate(45deg)
+
+      &.red
+        .check, .check:after
+          border-color: $redColor
+
+      &.blue
+        .check, .check:after
+          border-color: $blueColor
+
+    input[type=text], input[type=number], select
+      appearance: none
+      outline: none
+      padding: 3px
+      border-radius: 3px
+      border: 2px solid $primaryColor
+      font-weight: 600
+      width: auto
+      max-width: 110px
+      padding-left: $spacing - 2px
+
+    input[type=text], .select_container
+      /*padding-left: $spacing - 2px*/
+      padding-right: $spacing - 2px
+      margin-bottom: $spacing
+
+    select::-ms-expand
+      display: none
+
+    .select_container
+      display: inline-block
+      width: 100%
+      max-width: 620px
+
+      &:before
+        background-color: transparent
+
+    .dash
+      display: inline-block
+      margin: 0 12px 0
+      -webkit-transform: scale(2.0, 1.0)
+      -moz-transform: scale(2.0, 1.0)
+      -ms-transform: scale(2.0, 1.0)
+      -o-transform: scale(2.0, 1.0)
+      transform: scale(2.0, 1.0)
+
+.ip-double-slider-container
+  position: relative
+
+  & > span
+    display: inline-block
+
+  .ip-range span
+    margin-top: $spacing
+
+  .ip-double-slider
+    margin-top: 12.5px
+    margin-bottom: 12.5px
+
+  input[type=range]
+    -webkit-appearance: none
+    appearance: none
+    position: absolute
+    pointer-events: none
+    width: 100%
+    height: 3px
+    border-radius: 5px
+    background: $primaryColor
+    outline: none
+
+    &::-webkit-slider-thumb
+      -webkit-appearance: none
+      appearance: none
+      width: 10px
+      height: 25px
+      background: $primaryColor
+      border-radius: 5px
+      cursor: pointer
+      pointer-events: all
+      z-index: 99
+
+    &::-moz-range-thumb
+      appearance: none
+      width: 10px
+      height: 25px
+      background: $primaryColor
+      border-radius: 5px
+      cursor: pointer
+      border: none
+      pointer-events: all
+
+  .from-slider
+    height: 0
+    z-index: 1
+
+.ip-flex
+  display: flex
+  flex-wrap: wrap
+  column-gap: 2 * $spacing
+  row-gap: $spacing
+
+  .ip-flex
+    column-gap: $spacing
+    row-gap: 0
+    align-items: baseline
+
+  .ip-flex-item
+    width: calc(50% - #{2 * $spacing})
+
+  .ip-flex-item-fill
+    &, & .select_container
+      width: auto !important
+
+    & .select_container
+      min-width: 105px
+      /*padding-left: 10px*/
+      padding-right: 10px
+      margin-bottom: 12px
+
+  .ip-flex-row
+    width: 100%
+
+  .ip-row-nr, .ip-row-mobile-nr
+    font-size: 3.750em
+    font-weight: 600
+    font-style: normal
+    line-height: 1.085em
+    text-decoration: none
+    text-transform: none
+    letter-spacing: 0px
+    color: $darkColor
+
+  .ip-flex-padding
+
+  .ip-flex-padding
+    padding-top: 27px
+
+  .ip-flex-break
+    flex-basis: 100%
+    height: 0
+
+  .ip-flex-col
+    word-break: break-word
+    flex-grow: 1
+    text-align: center
+    line-height: 1.2
+    position: relative
+    width: 100px
+
+.ip-ranking-wrapper
+  #idTable
+    margin-top: 4 * $spacing
+    margin-bottom: 2 * $spacing
+    font-size: $fontSize
+    transition: opacity 300ms
+    opacity: 1
+
+    span.woocommerce-Price-amount.amount
+      font-size: 100%
+
+    .ip-mobile-row
+      display: none
+
+    &.loading
+      pointer-events: none
+      background-image: url('../icons/loading.gif')
+      background-repeat: no-repeat
+      background-position: center 100px
+      opacity: 0.3
+
+    .ip-flex
+      justify-content: end
+      gap: 0
+
+    .ip-flex-row
+      border-bottom: 3px solid $primaryColor
+      display: flex
+      flex-wrap: nowrap
+      column-gap: $spacing
+      align-items: center
+      padding-bottom: $spacing
+      margin-bottom: $spacing
+
+    .row-not-found p
+      width: 100%
+      text-align: center
+      margin: 0
+      padding: $spacing * 3
+
+    .ip-row-toggle
+      text-align: right
+
+    .ip-flex-row
+      .ip-col-number
+        max-width: 48px
+        width: 48px
+        white-space: nowrap
+
+      .ip-col-image
+        &, img
+          width: 150px !important
+
+      .ip-col-title
+        max-width: 100px
+        font-weight: 600
+        text-align: left
+
+      .ip-col-price
+        span
+          display: block
+          color: $primaryColor
+
+          &.striked
+            color: $redColor
+            text-decoration: line-through
+
+      .ip-col-cta
+        .badge
+          margin-right: 0
+
+      .ip-col-airfilter
+        max-width: 120px
+        width: 120px
+
+      .ip-col-features
+        max-width: 120px
+        width: 120px
+
+      .ip-col-filter-price
+        max-width: 120px
+        width: 120px
+
+
+    ul
+      list-style: none
+      margin: 0
+      padding: 0
+
+    .sort
+      .ip-flex-col
+        font-weight: 600
+
+      a, a:hover, a:visited, a:active
+        text-decoration: none !important
+        border: none
+
+      .ip-icon
+        font-weight: 600
+        position: relative
+        display: inline-block
+        padding: 0
+
+        &:before
+          transition: opacity 300ms
+          opacity: 0
+          left: 100%
+
+      a:hover.ip-icon:before
+        opacity: 1
+
+      a.active.ip-icon:before
+        opacity: 1
+
+    .details
+      display: none
+
+      &[style*="display: block"]
+        display: flex !important
+
+      .desc
+        flex-shrink: 100
+        font-size: 120%
+
+        .ip-icon
+          width: 40px
+          height: 40px
+
+          &:before
+            width: 40px
+            background-size: 40px
+
+      .product_image
+        flex-grow: 1
+
+    .badges
+      margin-bottom: $spacing
+
+    .badge
+      background-color: $primaryColor
+      display: inline-block
+      padding: $spacing/2 $spacing $spacing/2
+      margin-right: $spacing
+      margin-bottom: $spacing/4
+      font-weight: 600
+      font-size: $fontSize
+      color: #FFF
+      border-radius: 100px
+
+      &.red
+        background-color: $redColor
+
+      &.blue
+        background-color: $blueColor
+
+    .ip-icons
+      margin-top: $spacing
+      position: relative
+
+      .ip-icon
+        display: inline-block
+        position: relative
+        width: 20px
+        height: 20px
+        padding: 0
+
+        &:before
+          left: 0
+
+      .badge
+        vertical-align: top
+        margin-left: $spacing/2
+
+    .rating
+      white-space: nowrap
+
+      .rating-star
+        background-image: url('../icons/icona-gwiazda.svg')
+        background-position: center
+        background-size: 16px
+        background-repeat: no-repeat
+        height: 20px
+        width: 12px
+        margin: 0
+        display: inline-block
+
+        &.off
+          background-image: url('../icons/icona-gwiazda-off.svg')
+
+        &.half
+          background-image: url('../icons/icona-gwiazda-half.svg')
+
+  .ip-load-more
+    text-align: center
+    padding: $spacing
+    margin-top: 2 * $spacing
+
+    .loading
+      display: none
+      background-image: url('../icons/loading.gif')
+      background-repeat: no-repeat
+      background-position: center
+      width: 200px
+      height: 44px
+
+    .ip-button
+      vertical-align: top
+      background-color: $darkColor
+      color: #FFF
+      min-width: 200px
+      padding: $spacing
+
+      &:hover
+        opacity: 0.9
+
+    &.active
+      .loading
+        display: inline-block
+
+      .ip-button
+        display: none
+
+
+.ip-toggle-button
+  position: relative
+  display: inline-block
+  width: $toggleButtonWidth
+  height: $toggleButtonSize
+  $toggleBaseSize: $toggleButtonSize - 2 * $toggleButtonMargin
+
+  input
+    opacity: 0
+    width: 0
+    height: 0
+
+  .slider
+    position: absolute
+    cursor: pointer
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    background-color: $greyColor
+    -webkit-transition: .4s
+    transition: .4s
+
+    &:before
+      position: absolute
+      content: ""
+      height: $toggleBaseSize
+      width: $toggleBaseSize
+      left: $toggleButtonMargin
+      bottom: $toggleButtonMargin
+      background-color: white
+      -webkit-transition: .4s
+      transition: .4s
+
+  input
+    &:checked + .slider
+      background-color: $primaryColor
+
+    &:focus + .slider
+      box-shadow: 0 0 1px $primaryColor
+
+    &:checked + .slider:before
+      -webkit-transform: translateX($toggleButtonWidth - $toggleButtonSize)
+      -ms-transform: translateX($toggleButtonWidth - $toggleButtonSize)
+      transform: translateX($toggleButtonWidth - $toggleButtonSize)
+
+  .slider.round
+    border-radius: $toggleButtonSize
+
+    &:before
+      border-radius: 50%
+
+@media (max-width: 767px)
+  .ip-flex
+    column-gap: 0
+
+    .ip-flex-item
+      width: 100%
+
+    .ip-flex-padding
+      padding-top: 0
+/*  .ip-ranking-wrapper
+    #ipFilter
+      input[type=number]
+        width: 70%
+        max-width: 100%*/
+@media (max-width: 479px)
+  .hide-xs
+    display: none
+  .ip-flex
+    column-gap: 0
+  .ip-ranking-wrapper
+    #ipFilter
+      .select_container
+        max-width: none
+        width: 44%
+
+@keyframes ipFadeOut
+  0%
+    opacity: 1
+    font-size: 100%
+  50%
+    opacity: 0
+    font-size: 100%
+  100%
+    opacity: 0
+    font-size: 0
+
+@keyframes ipFadeIn
+  0%
+    opacity: 0
+    font-size: 0
+  50%
+    opacity: 0
+    font-size: 100%
+  100%
+    opacity: 1
+    font-size: 100%
+
+@media (max-width: 1023px)
+  .ip-ranking-wrapper
+    #idTable
+      font-size: 100%
+
+      .ip-flex-row, .ip-flex-row.details, .ip-row-toggle
+        display: none !important
+
+      .ip-mobile-row
+        width: 100%
+        display: block
+
+        .clear
+          clear: both
+
+        .w-50
+          width: 50%
+
+        .w-20
+          width: 20%
+
+        .w-25
+          width: 25%
+
+        .w-30
+          width: 30%
+
+        .w-33
+          width: 33.3%
+
+        .w-75
+          width: 75%
+
+        .w-85
+          width: 82%
+
+        .w-15
+          width: 18%
+
+        .w-33, .w-25, .w-50, .w-75, .w-15, .w-85, .w-20, .w-30
+          text-align: center
+          min-height: 75px
+          float: left
+          margin-bottom: $spacing * 2
+
+        .ip-flex >
+          .w-33, .w-25, .w-50, .w-75, .w-15, .w-85, .w-20, .w-30
+            float: none
+            clear: both
+            align-self: center
+
+        .label
+          font-weight: 600
+          color: $primaryColor
+
+        .ip-col-image
+          img
+            width: 100% !important
+          margin-bottom: 0
+          margin-top: 0
+
+        .ip-col-title
+          line-height: 1
+          font-weight: 600
+          margin-bottom: $spacing
+
+        .ip-col-reviews
+          margin-bottom: $spacing
+
+        .ip-col-cta
+          margin-bottom: 4 * $spacing
+          a.badge
+            padding: 6px 0px
+            display: block
+            position: relative
+            width: 100%
+            text-align: center
+            font-size: 120%
+            &.sale:before
+              position: absolute
+              right: 0
+              top: 0
+              content: "Promocja"
+              height: 100%
+              background-color: $redColor
+              border-radius: 100px
+              padding: 0 20px 0
+              line-height: 38.4px
+
+        .number
+          min-height: 75px
+          margin-bottom: 0
+
+        .ip-col-number
+          width: fit-content
+          position: relative
+
+          span
+            border-radius: 50%
+            min-width: 40px
+            font-size: 40px
+            padding: 10px
+            background: #fff
+            border: 6px solid $primaryColor
+            color: #000
+            text-align: center
+            display: block
+
+        .line
+          position: relative
+
+          &:before
+            position: absolute
+            left: 0
+            top: 50%
+            height: 10px
+            margin-top: -5px
+            background: $primaryColor
+            content: ""
+            width: 100%
+            display: block
+
+      .ip-icons
+        .ip-icon
+          width: $iconSizeMobile
+          height: $iconSizeMobile
+
+          &:before
+            width: $iconSizeMobile
+            background-size: $iconSizeMobile
+
+        .ip-icon-nawilzanie
+          width: 0.5*$iconSizeMobile !important
+
+          &:before
+            left: - 0.25 * $iconSizeMobile
+
+      .rating
+        height: 25px
+
+        .rating-star
+          background-size: 16px * 1.5
+          height: 20px * 1.5
+          width: 12px * 1.5
+
+@media (max-width: 425px)
+  .ip-ranking-wrapper
+    #idTable .ip-mobile-row
+      .w-15
+        width: 30%
+
+      .w-85
+        width: 70%
+
+@media (max-width: 479px)
+  body .body_wrap .page_wrap .page_content_wrap
+    .content_wrap, .content_container
+      width: 90% !important
+  .ip-ranking-wrapper
+    #idTable .ip-mobile-row
+      .w-15
+        width: 25%
+
+      .w-85
+        width: 75%
+
+@media (max-width: 1279px)
+  .ip-flex-col
+    &.ip-col-energy, &.ip-col-filter-price
+      display: none
+    &.ip-col-cta
+      width: 120px
+
+@media (max-width: 1350px)
+  .ip-flex-col
+    &.ip-col-energy
+      display: none
+
+@media (max-width: 1439px)
+  body .body_wrap .page_wrap .page_content_wrap
+    .content_wrap, .content_container
+      width: 1205px
