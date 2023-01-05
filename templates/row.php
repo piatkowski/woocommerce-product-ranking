@@ -3,29 +3,36 @@
         <span class="ip-row-nr"></span>
     </div>
     <div class="ip-flex-col ip-col-image">
-        <img
+        <a href="<?php esc_html_e( $data->link ); ?>" target="_blank">
+            <img
                 src="<?php esc_html_e( $data->thumbnail ); ?>"
                 loading="lazy"
                 alt="<?php esc_html_e( $data->title ); ?>">
+        </a>
     </div>
     <div class="ip-flex-col ip-col-title">
-		<?php esc_html_e( $data->title ); ?>
+        <a href="<?php esc_html_e( $data->link ); ?>" target="_blank">
+            <?php esc_html_e( $data->title ); ?>
+        </a>
         <div class="ip-icons">
 			<?php
 			if ( isset( $data->home ) ) {
-				echo '<span class="ip-icon ip-icon-do-domu"></span>';
+				echo '<span class="ip-icon ip-icon-do-domu ip-icon-tooltip"></span>';
+                echo '<div class="ip-tooltip">Dla domu</div>';
 			}
 			if ( isset( $data->office ) ) {
-				echo '<span class="ip-icon ip-icon-do-pracy"></span>';
+				echo '<span class="ip-icon ip-icon-do-pracy ip-icon-tooltip"></span>';
+				echo '<div class="ip-tooltip">Do biura</div>';
 			}
 			if ( isset( $data->allergy ) ) {
-				echo '<span class="ip-icon ip-icon-alergicy"></span>';
+				echo '<span class="ip-icon ip-icon-alergicy ip-icon-tooltip"></span>';
+				echo '<div class="ip-tooltip">Dla alergików</div>';
 			}
 			?>
         </div>
     </div>
     <div class="ip-flex-col ip-col-price">
-		<?php if ( $data->is_on_sale ) : ?>
+		<?php if ( $data->is_on_sale && $data->regular_price > 0 ) : ?>
             <span class="striked"><?php echo strip_tags( wc_price( $data->regular_price ) ); ?></span>
             <span><?php echo strip_tags( wc_price( $data->price ) ); ?></span>
 		<?php else: ?>

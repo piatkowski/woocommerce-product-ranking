@@ -10,13 +10,19 @@
 
     <div class="ip-flex">
         <div class="w-50 ip-col-image">
-            <img
-                    src="<?php esc_html_e( $data->image ); ?>"
-                    loading="lazy"
-                    alt="<?php esc_html_e( $data->title ); ?>">
+            <a href="<?php esc_html_e( $data->link ); ?>" target="_blank">
+                <img
+                        src="<?php esc_html_e( $data->image ); ?>"
+                        loading="lazy"
+                        alt="<?php esc_html_e( $data->title ); ?>">
+            </a>
         </div>
         <div class="w-25">
-            <div class="ip-col-title"><?php esc_html_e( $data->title ); ?></div>
+            <div class="ip-col-title">
+                <a href="<?php esc_html_e( $data->link ); ?>" target="_blank">
+					<?php esc_html_e( $data->title ); ?>
+                </a>
+            </div>
             <div class="ip-col-reviews">
                 <div class="rating">
 					<?php
@@ -37,7 +43,7 @@
 				<?php echo intval( $data->reviews_num ) ?> opinii
             </div>
             <div class="ip-col-price">
-				<?php if ( $data->is_on_sale ) : ?>
+				<?php if ( $data->is_on_sale && $data->regular_price > 0 ) : ?>
                     <span class="striked"><?php echo strip_tags( wc_price( $data->regular_price ) ); ?></span>
                     <span><?php echo strip_tags( wc_price( $data->price ) ); ?></span>
 				<?php else: ?>
@@ -119,7 +125,7 @@
     <div class="w-33">
         <div class="ip-col-filter-price">
 			<?php if ( isset( $data->filter_price ) && (int) $data->filter_price > 0 ): ?>
-                <?php echo wc_price( $data->filter_price ); ?> rocznie
+				<?php echo wc_price( $data->filter_price ); ?> rocznie
 			<?php else: ?>
                 -
 			<?php endif; ?>
@@ -131,7 +137,8 @@
     <div class="clear"></div>
 
     <div class="ip-col-cta">
-        <a href="<?php esc_html_e( $data->link ); ?>" target="_blank" class="badge<?php echo $data->is_on_sale ? ' sale' : '' ?>">Sprawdź</a>
+        <a href="<?php esc_html_e( $data->link ); ?>" target="_blank"
+           class="badge<?php echo $data->is_on_sale ? ' sale' : '' ?>">Sprawdź</a>
     </div>
 
 </div>

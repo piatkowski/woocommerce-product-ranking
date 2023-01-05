@@ -465,15 +465,18 @@ body .content_wrap
         padding: 0
 
         &:before
-          transition: opacity 300ms
-          opacity: 0
+          //transition: opacity 300ms
+          //opacity: 1
           left: 100%
 
       a:hover.ip-icon:before
-        opacity: 1
+        //opacity: 1
+
+      a.active
+        color: $primaryColor
 
       a.active.ip-icon:before
-        opacity: 1
+        //opacity: 1
 
     .details
       display: none
@@ -526,6 +529,7 @@ body .content_wrap
         width: 20px
         height: 20px
         padding: 0
+        cursor: pointer
 
         &:before
           left: 0
@@ -533,6 +537,29 @@ body .content_wrap
       .badge
         vertical-align: top
         margin-left: $spacing/2
+
+      .ip-tooltip
+        display: none
+        position: absolute
+        background: #555
+        color: #FFF
+        bottom: 30px
+        font-size: 14px
+        padding: 5px 10px
+        border-radius: 8px
+        word-break: keep-all
+        width: max-content
+        z-index: 10
+        font-weight: normal
+        &:after
+          content: ""
+          position: absolute
+          top: 100%
+          left: 50%
+          margin-left: -5px
+          border-width: 5px
+          border-style: solid
+          border-color: #555 transparent transparent transparent
 
     .rating
       white-space: nowrap
@@ -865,3 +892,29 @@ body .content_wrap
   body .body_wrap .page_wrap .page_content_wrap
     .content_wrap, .content_container
       width: 1205px
+
+@media (min-width: 1536px)
+  body .body_wrap .page_wrap .page_content_wrap
+    .content_wrap, .content_container
+      width: 95%
+  .ip-ranking-wrapper
+    #idTable, #ipFilter
+      font-size: 100%
+    #idTable .ip-flex-row
+      max-width: none !important
+  .ip-ranking-wrapper #idTable .ip-icons .ip-icon
+    width: 26px
+    height: 26px
+    &:before
+      width: 26px
+      background-size: 26px
+  .ip-ranking-wrapper #idTable .ip-icons .ip-tooltip
+    bottom: 40px
+
+@media (min-width: 1920px)
+  body .body_wrap .page_wrap .page_content_wrap
+    .content_wrap, .content_container
+      width: 95%
+  .ip-ranking-wrapper
+    #idTable, #ipFilter
+      font-size: 110%

@@ -234,7 +234,13 @@ class Admin {
 				'desc'    => 'Tytuł tabeli',
 				'type'    => 'text',
 				'default' => 'Ranking oczyszczaczy',
-			)
+			),
+			'sale_tag_id' => array(
+				'label'   => 'Tag dla promocji',
+				'desc'    => 'ID tagu lub wiele ID oddzielonych przecinkami. Jeżeli produkt posiada ten tag to będzie traktowany jako "w promocji".',
+				'type'    => 'text',
+				'default' => '902'
+			),
 		);
 
 		register_setting( self::PAGE, self::OPTIONS, array( __CLASS__, 'validate' ) );

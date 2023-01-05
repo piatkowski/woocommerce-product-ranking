@@ -448,15 +448,10 @@ body .content_wrap {
   padding: 0;
 }
 .ip-ranking-wrapper #idTable .sort .ip-icon:before {
-  transition: opacity 300ms;
-  opacity: 0;
   left: 100%;
 }
-.ip-ranking-wrapper #idTable .sort a:hover.ip-icon:before {
-  opacity: 1;
-}
-.ip-ranking-wrapper #idTable .sort a.active.ip-icon:before {
-  opacity: 1;
+.ip-ranking-wrapper #idTable .sort a.active {
+  color: #009900;
 }
 .ip-ranking-wrapper #idTable .details {
   display: none;
@@ -509,6 +504,7 @@ body .content_wrap {
   width: 20px;
   height: 20px;
   padding: 0;
+  cursor: pointer;
 }
 .ip-ranking-wrapper #idTable .ip-icons .ip-icon:before {
   left: 0;
@@ -516,6 +512,30 @@ body .content_wrap {
 .ip-ranking-wrapper #idTable .ip-icons .badge {
   vertical-align: top;
   margin-left: 6px;
+}
+.ip-ranking-wrapper #idTable .ip-icons .ip-tooltip {
+  display: none;
+  position: absolute;
+  background: #555;
+  color: #FFF;
+  bottom: 30px;
+  font-size: 14px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  word-break: keep-all;
+  width: max-content;
+  z-index: 10;
+  font-weight: normal;
+}
+.ip-ranking-wrapper #idTable .ip-icons .ip-tooltip:after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
 }
 .ip-ranking-wrapper #idTable .rating {
   white-space: nowrap;
@@ -854,6 +874,36 @@ body .content_wrap {
 @media (max-width: 1439px) {
   body .body_wrap .page_wrap .page_content_wrap .content_wrap, body .body_wrap .page_wrap .page_content_wrap .content_container {
     width: 1205px;
+  }
+}
+@media (min-width: 1536px) {
+  body .body_wrap .page_wrap .page_content_wrap .content_wrap, body .body_wrap .page_wrap .page_content_wrap .content_container {
+    width: 95%;
+  }
+  .ip-ranking-wrapper #idTable, .ip-ranking-wrapper #ipFilter {
+    font-size: 100%;
+  }
+  .ip-ranking-wrapper #idTable .ip-flex-row {
+    max-width: none !important;
+  }
+  .ip-ranking-wrapper #idTable .ip-icons .ip-icon {
+    width: 26px;
+    height: 26px;
+  }
+  .ip-ranking-wrapper #idTable .ip-icons .ip-icon:before {
+    width: 26px;
+    background-size: 26px;
+  }
+  .ip-ranking-wrapper #idTable .ip-icons .ip-tooltip {
+    bottom: 40px;
+  }
+}
+@media (min-width: 1920px) {
+  body .body_wrap .page_wrap .page_content_wrap .content_wrap, body .body_wrap .page_wrap .page_content_wrap .content_container {
+    width: 95%;
+  }
+  .ip-ranking-wrapper #idTable, .ip-ranking-wrapper #ipFilter {
+    font-size: 110%;
   }
 }
 

@@ -1,6 +1,8 @@
 <div class="ip-flex-row details ajax">
     <div class="desc">
-        <h3><?php esc_html_e( $data->title ); ?></h3>
+        <h3>
+            <a href="<?php esc_html_e( $data->link ); ?>" target="_blank"><?php esc_html_e( $data->title ); ?></a>
+        </h3>
         <div class="badges">
 			<?php
 			if ( isset( $data->home ) ) {

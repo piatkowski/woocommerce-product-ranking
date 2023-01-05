@@ -1,5 +1,5 @@
-function doubleSlider($container) {
-    this.value = {from: 0, to: 100}
+function doubleSlider($container, initialValues) {
+    this.value = initialValues;
     const inputFields = $container.querySelectorAll('input[type=range]');
 
     this.input = {
@@ -137,6 +137,10 @@ jQuery(document).ready(function ($) {
         e.preventDefault();
         $ipFilter.addClass('loading');
         $ipTable.addClass('loading');
+
+        if (!mode) {
+            $ipFilter.find('input[name=page]').val(0);
+        }
         var data = $(this).serialize();
         $.post(woocommerce_params.ajax_url, data, function (response) {
             $ipFilter.removeClass('loading');
@@ -171,7 +175,10 @@ jQuery(document).ready(function ($) {
     });
 
     $('.ip-double-slider').each(function () {
-        $(this)[0].doubleSlider = new doubleSlider($(this)[0]);
+        $(this)[0].doubleSlider = new doubleSlider($(this)[0], {
+            from:   Number($(this).find('input').eq(0).attr('min')),
+            to:     Number($(this).find('input').eq(0).attr('max'))
+        });
         $(this)[0].addEventListener("slider:change", function (e) {
             const id = '#ip-slider-' + e.detail.name + '-';
             $(id + 'from').text(e.detail.from + ' zł');
@@ -217,5 +224,16 @@ jQuery(document).ready(function ($) {
             $ipLoadMoreButton.trigger('click');
         }
     });
+
+    $(document).on('mouseenter', '.ip-icon-tooltip', function () {
+        const tooltip = $(this).next();
+        tooltip.css({
+            left: $(this).position().left  - tooltip.width() / 2
+        });
+        tooltip.stop(true, true).fadeIn('fast');
+    }).on('mouseleave', '.ip-icon-tooltip', function () {
+        $(this).next().stop(true, true).fadeOut('fast');
+    });
+
 
 });

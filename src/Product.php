@@ -141,7 +141,10 @@ class Product {
 
 	private function getMeta() {
 
+		$is_on_sale = false;
+
 		if ( $this->product->is_on_sale() ) {
+			$is_on_sale = true;
 			if ( $this->product->is_type( 'variable' ) ) {
 				$regular_price = $this->product->get_variation_regular_price( 'min' );
 				$price         = $this->product->get_variation_sale_price( 'min' );
@@ -160,8 +163,21 @@ class Product {
 
 		$attributes = $this->getAttributes();
 		$tags       = $this->getTags();
-		$output     = array(
-			'is_on_sale'    => $this->product->is_on_sale(),
+
+		if ( ! $is_on_sale ) {
+			// Check if sale tag exists
+			$sale_tag_ids = explode( ',', Plugin::config( 'sale_tag_id' ) );
+			foreach ( $sale_tag_ids as $tag_id_str ) {
+				$tag_id = absint( trim( $tag_id_str ) );
+				if ( isset( $tags[ $tag_id ] ) ) {
+					$is_on_sale = true;
+					break;
+				}
+			}
+		}
+
+		$output = array(
+			'is_on_sale'    => $is_on_sale,
 			'price'         => $price,
 			'regular_price' => $regular_price,
 			'link'          => $this->product->get_permalink(),
@@ -174,10 +190,10 @@ class Product {
 			/*'attributes'    => $attributes,
 			'tags'          => $tags*/
 		);
-		$output     = array_merge( $output, $this->mapAttributes( $attributes ) );
-		$output     = array_merge( $output, $this->mapTags( $tags ) );
-		$output     = array_merge( $output, $this->mapAcfFields() );
-		$output     = array_merge( $output, $this->mapCSVFields() );
+		$output = array_merge( $output, $this->mapAttributes( $attributes ) );
+		$output = array_merge( $output, $this->mapTags( $tags ) );
+		$output = array_merge( $output, $this->mapAcfFields() );
+		$output = array_merge( $output, $this->mapCSVFields() );
 
 		return $this->cleanOutput( $output );
 	}

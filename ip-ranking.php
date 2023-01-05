@@ -3,7 +3,7 @@
 /*
 Plugin Name: Ranking Produktów
 Description:
-Version: 1.1.3
+Version: 1.1.4
 Author: Krzysztof Piątkowski
 Author URI: https://github.com/piatkowski/
 License: GPL2
@@ -20,7 +20,7 @@ class Plugin {
 	public static $path = '';
 	public static $url = '';
 	const DEV = true;
-	const VERSION = '1.1.3';
+	const VERSION = '1.1.4';
 
 	public static function init() {
 		self::$path = plugin_dir_path( __FILE__ );
@@ -35,7 +35,8 @@ class Plugin {
 		$config = array(
 			'category_id' => Admin::get( 'category_id' ),
 			'per_page'    => Admin::get( 'per_page' ),
-			'title'       => Admin::get( 'title' )
+			'title'       => Admin::get( 'title' ),
+			'sale_tag_id' => Admin::get( 'sale_tag_id' )
 		);
 
 		if ( $key && isset( $config[ $key ] ) ) {

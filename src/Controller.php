@@ -270,6 +270,7 @@ class Controller {
 
 	private static function isMatchingFilter( $product_data, $filter_args ) {
 		$isMatching = false;
+
 		foreach ( $filter_args as $arg ) {
 			$field = $arg['field'];
 
