@@ -31,8 +31,10 @@ namespace IPRanking;
                 <div class="ip-double-slider-container">
                     <span>Roczny koszt filtrów</span>
                     <div class="ip-double-slider">
-                        <input type="range" data-name="filter_price" name="filter_price[from]" autocomplete="off" value="0" min="0"
-                               max="<?php esc_html_e( $data->range['max_filter_price'] ); ?>" step="5" class="from-slider"/>
+                        <input type="range" data-name="filter_price" name="filter_price[from]" autocomplete="off"
+                               value="0" min="0"
+                               max="<?php esc_html_e( $data->range['max_filter_price'] ); ?>" step="5"
+                               class="from-slider"/>
                         <input type="range" data-name="filter_price" name="filter_price[to]" step="5" autocomplete="off"
                                value="<?php esc_html_e( $data->range['max_filter_price'] ); ?>" min="0"
                                max="<?php esc_html_e( $data->range['max_filter_price'] ); ?>"/>
@@ -94,11 +96,11 @@ namespace IPRanking;
                         </select>
                         <span class="dash">&dash;</span>
                         <select name="airflow[to]" autocomplete="off">
-	                        <?php
-	                        foreach ( range( 500, 1900, 100 ) as $value ) {
-		                        echo '<option value="' . $value . '">' . $value . '</option>';
-	                        }
-	                        ?>
+							<?php
+							foreach ( range( 500, 1900, 100 ) as $value ) {
+								echo '<option value="' . $value . '">' . $value . '</option>';
+							}
+							?>
                             <option value="2000" selected>2000</option>
                         </select>
                     </div>
@@ -114,19 +116,19 @@ namespace IPRanking;
                 <div class="ip-flex">
                     <div class="ip-flex-item-fill">
                         <select name="noise[from]" autocomplete="off">
-	                        <?php
-	                        foreach ( range( 15, 70, 5 ) as $value ) {
-		                        echo '<option value="' . $value . '">' . $value . '</option>';
-	                        }
-	                        ?>
+							<?php
+							foreach ( range( 15, 70, 5 ) as $value ) {
+								echo '<option value="' . $value . '">' . $value . '</option>';
+							}
+							?>
                         </select>
                         <span class="dash">&dash;</span>
                         <select name="noise[to]" autocomplete="off">
-	                        <?php
-	                        foreach ( range( 15, 65, 5 ) as $value ) {
-		                        echo '<option value="' . $value . '">' . $value . '</option>';
-	                        }
-	                        ?>
+							<?php
+							foreach ( range( 15, 65, 5 ) as $value ) {
+								echo '<option value="' . $value . '">' . $value . '</option>';
+							}
+							?>
                             <option value="70" selected>70</option>
                         </select>
                     </div>
@@ -140,17 +142,40 @@ namespace IPRanking;
                     <span>Producent:</span>
                 </div>
 				<?php
-				$terms = get_terms( array(
-					'taxonomy'   => 'product_cat',
-					'hide_empty' => true,
-					'parent'     => Plugin::config( 'category_id' )
-				) );
+				$terms_included = array();
+				$terms_excluded = array();
+				if ( ! empty( Plugin::config( 'manufacturer_ids' ) ) ) {
+					$terms_included = get_terms( array(
+						'taxonomy'   => 'product_cat',
+						'hide_empty' => true,
+						'parent'     => Plugin::config( 'category_id' ),
+						'orderby'    => 'include',
+						'include'    => Plugin::config( 'manufacturer_ids' )
+					) );
+					$terms_excluded = get_terms( array(
+						'taxonomy'   => 'product_cat',
+						'hide_empty' => true,
+						'parent'     => Plugin::config( 'category_id' ),
+						'exclude'    => Plugin::config( 'manufacturer_ids' )
+					) );
+				} else {
+					$terms_included = get_terms( array(
+						'taxonomy'   => 'product_cat',
+						'hide_empty' => true,
+						'parent'     => Plugin::config( 'category_id' ),
+					) );
+                }
 				?>
                 <select name="manufacturer" autocomplete="off">
                     <option value="0"> - wybierz -</option>
 					<?php
-					if ( $terms ) {
-						foreach ( $terms as $term ) {
+					if ( $terms_included ) {
+						foreach ( $terms_included as $term ) {
+							echo '<option value="' . $term->term_id . '">' . strtoupper( $term->slug ) . '</option>';
+						}
+					}
+					if ( $terms_excluded ) {
+						foreach ( $terms_excluded as $term ) {
 							echo '<option value="' . $term->term_id . '">' . strtoupper( $term->slug ) . '</option>';
 						}
 					}

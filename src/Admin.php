@@ -223,6 +223,12 @@ class Admin {
 				'default' => 88,
 				'options' => $categories
 			),
+			'manufacturer_ids' => array(
+				'label'   => 'ID Producentów',
+				'desc'    => 'ID kategorii producentów oddzielone przecinkiem. Pole służy do określenia kolejności producentów w filtrowaniu.',
+				'type'    => 'text',
+				'default' => ''
+			),
 			'per_page'    => array(
 				'label'   => 'Ilość produktów na stronę',
 				'desc'    => 'Ilość produktów na stronę',
@@ -240,7 +246,7 @@ class Admin {
 				'desc'    => 'ID tagu lub wiele ID oddzielonych przecinkami. Jeżeli produkt posiada ten tag to będzie traktowany jako "w promocji".',
 				'type'    => 'text',
 				'default' => '902'
-			),
+			)
 		);
 
 		register_setting( self::PAGE, self::OPTIONS, array( __CLASS__, 'validate' ) );
@@ -499,6 +505,7 @@ class Admin {
 				echo '</select>';
 				break;
 		}
+        echo '<p>' . esc_html($args['desc']) . '</p>';
 	}
 
 	/**

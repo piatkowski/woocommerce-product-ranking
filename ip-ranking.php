@@ -33,10 +33,11 @@ class Plugin {
 	public static function config( $key ) {
 
 		$config = array(
-			'category_id' => Admin::get( 'category_id' ),
-			'per_page'    => Admin::get( 'per_page' ),
-			'title'       => Admin::get( 'title' ),
-			'sale_tag_id' => Admin::get( 'sale_tag_id' )
+			'category_id'      => Admin::get( 'category_id' ),
+			'per_page'         => Admin::get( 'per_page' ),
+			'title'            => Admin::get( 'title' ),
+			'sale_tag_id'      => Admin::get( 'sale_tag_id' ),
+			'manufacturer_ids' => Admin::get( 'manufacturer_ids' )
 		);
 
 		if ( $key && isset( $config[ $key ] ) ) {
