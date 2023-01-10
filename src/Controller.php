@@ -97,7 +97,7 @@ class Controller {
 			'noise',
 			//'airfilter',
 			//'features',
-			'filter-price',
+			'filter_price',
 			'energy',
 			'points'
 		);

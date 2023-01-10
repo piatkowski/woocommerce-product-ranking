@@ -28,7 +28,7 @@
 		funkcje<br />i wyposażenie
 	</div>
 	<div class="ip-flex-col ip-col-filter-price">
-		<a href="#" class="ip-icon" data-order-by="filter-price" data-order="DESC">koszt<br />filtrów</a>
+		<a href="#" class="ip-icon" data-order-by="filter_price" data-order="DESC">koszt<br />filtrów</a>
 	</div>
 	<div class="ip-flex-col ip-col-energy">
 		<a href="#" class="ip-icon" data-order-by="energy" data-order="DESC">koszt<br />prądu</a>
