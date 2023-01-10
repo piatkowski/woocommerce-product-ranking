@@ -325,11 +325,26 @@ body .content_wrap {
 .ip-flex .ip-flex-row {
   width: 100%;
 }
-.ip-flex .ip-row-nr, .ip-flex .ip-row-mobile-nr {
+.ip-flex .ip-row-mobile-nr {
   font-size: 3.75em;
   font-weight: 600;
   font-style: normal;
   line-height: 1.085em;
+  text-decoration: none;
+  text-transform: none;
+  letter-spacing: 0px;
+  color: #212121;
+}
+.ip-flex .ip-row-nr {
+  display: block;
+  width: 52px;
+  height: 52px;
+  border: 3px solid #009900;
+  border-radius: 100%;
+  line-height: 52px;
+  font-size: 2.5em;
+  font-weight: 600;
+  font-style: normal;
   text-decoration: none;
   text-transform: none;
   letter-spacing: 0px;
